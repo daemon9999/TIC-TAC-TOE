@@ -12,7 +12,7 @@ interface SiteContextData {
   clearXO: () => void;
   turn: string;
   changeTurn: () => void;
-  handleClick: (e:any, n: number) => void;
+  handleClick: (_e:any, n: number) => void;
 }
 
 interface AppProviderProps {
@@ -66,7 +66,8 @@ const AppProvider = ({ children }: AppProviderProps) => {
     setTurn((prevT) => (prevT === "x" ? "o" : "x"));
   }, []);
 
-  const handleClick = useCallback((e: any, n: number) => {
+  const handleClick = useCallback(( _e: any, n: number) => {
+    
     if (oUser.includes(n) || xUser.includes(n)) return;
 
     addXO(turn, n);
