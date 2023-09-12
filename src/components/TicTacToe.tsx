@@ -1,7 +1,9 @@
-import { useSite } from "../context/AppProvider";
+import { useDispatch } from "react-redux";
+import { clickBoard } from "src/store/gameSlice";
+import { useGame } from "src/utils/game";
 
 const TicTacToe = () => {
-  const { board, turn, winner } = useSite();
+  const { board, turn, winner } = useGame();
 
   return (
     <div className="flex flex-col gap-y-10 p-10 border-r border-slate-800">
@@ -12,8 +14,8 @@ const TicTacToe = () => {
           {winner.toUpperCase()}
         </span>
         ): (
-          <span className={`${turn === "x" ? "text-green-500" : "text-red-500"}`}>
-          {turn.toUpperCase()}
+          <span className={`${turn === "1" ? "text-green-500" : "text-red-500"}`}>
+          {turn === '1' ? 'X' : 'O'}
         </span>
         )}
       </h3>
@@ -31,8 +33,8 @@ interface CellProps {
   sign: string | null;
 }
 const Cell = ({ i, sign }: CellProps) => {
-  const { handleClick, board, winner } = useSite();
-
+  const {  board, winner } = useGame();
+  const dispatch = useDispatch()
   const disabled = board[i] === "x" || board[i] === "o" || winner;
 
   if (disabled) {
@@ -49,7 +51,7 @@ const Cell = ({ i, sign }: CellProps) => {
 
   return (
     <span
-      onClick={(e) => handleClick(e, i)}
+      onClick={(_e) => dispatch(clickBoard(i))}
       className="cursor-pointer border relative border-slate-800 h-full w-full flex items-center justify-center "
     >
       <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></p>

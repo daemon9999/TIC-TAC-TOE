@@ -1,8 +1,10 @@
-type ModalData = {
-  headerTitle: string;
-
-  bodyContent?: React.ReactNode;
-  footerContent?: React.ReactNode;
-  closeBtn: boolean;
-
+type ModalType = {
+  modalName: string,
+  data?: any
 };
+
+
+type StaticModalType = {
+  name: string,
+  element: () => React.ReactNode
+}

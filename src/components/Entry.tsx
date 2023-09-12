@@ -1,9 +1,11 @@
 import { AiOutlineInfo } from "react-icons/ai";
-import { useSite } from "../context/AppProvider";
+
+import { useDispatch } from "react-redux";
+import { startGame } from "src/store/gameSlice";
 
 const Entry = () => {
 
-    const {startGame} = useSite()
+    const dispatch = useDispatch()
   return (
     <section className="h-96 w-1/2 bg-white  rounded-xl p-12 flex flex-col">
       <div className="flex flex-col gap-y-4 items-center ">
@@ -14,7 +16,7 @@ const Entry = () => {
       </div>
 
       <div className="mt-auto flex items-center gap-x-6 justify-end">
-        <button onClick={startGame} className="border border-slate-800  rounded-md w-60 py-2 text-lg hover:bg-slate-800 hover:text-white transition duration-300  ">
+        <button onClick={() => dispatch(startGame())} className="border border-slate-800  rounded-md w-60 py-2 text-lg hover:bg-slate-800 hover:text-white transition duration-300  ">
           Start Game
         </button>
 
