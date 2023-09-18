@@ -5,6 +5,8 @@ type InitialStateProps = {
   board: Array<string | null>;
   winner: string | null;
   turn: string;
+  user_1: User;
+  user_2: User;
 };
 
 const winnerOptions = [
@@ -25,6 +27,8 @@ const initialState: InitialStateProps = {
   board: Array(9).fill(null),
   turn: "1",
   winner: null,
+  user_1: { id: 1, name: "", sign: "", color: "" },
+  user_2: { id: 2, name: "", sign: "", color: "" },
 };
 
 const gameSlice = createSlice({
@@ -36,27 +40,20 @@ const gameSlice = createSlice({
     },
 
     changeTurn: (state) => {
-  
       state.turn = state.turn === "1" ? "2" : "1";
     },
 
-    
-
     clickBoard: (state, action) => {
-      
       const newBoard = [...state.board];
-      console.log(state.turn)
+
       newBoard[action.payload] = state.turn === "1" ? "x" : "o";
       state.board = newBoard;
-      checkWinner(state)
+      checkWinner(state);
     },
   },
 });
 
-
-
-const checkWinner =  (state: InitialStateProps) => {
-  console.log('isledi')
+const checkWinner = (state: InitialStateProps) => {
   winnerOptions.map((winnerOption) => {
     const [i1, i2, i3] = winnerOption;
     if (
@@ -65,14 +62,12 @@ const checkWinner =  (state: InitialStateProps) => {
       state.board[i1] === state.board[i3]
     ) {
       state.winner = state.board[i1];
-      return
+      return;
     }
-    
   });
- 
-  state.turn = state.turn === '1' ? '2': '1'
 
-}
+  state.turn = state.turn === "1" ? "2" : "1";
+};
 
 export default gameSlice.reducer;
 export const { startGame, changeTurn, clickBoard } = gameSlice.actions;
