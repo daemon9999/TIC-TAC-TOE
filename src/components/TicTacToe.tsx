@@ -3,33 +3,31 @@ import { clickBoard } from "src/store/gameSlice";
 import { useGame } from "src/utils/game";
 
 const TicTacToe = () => {
-  const { board, turn, winner } = useGame();
+  const { board, turn, winner, user_1, user_2 } = useGame();
 
   return (
     <div className="flex flex-col gap-y-10 p-10 border-r border-slate-800">
       <h3 className="text-5xl font-bold text-slate-800 ">
         {!board.includes(null) ? (
-          <span
-            className={'text-yellow-500'}
-          >DRAW</span>
+          <span className={"text-yellow-500"}>DRAW</span>
         ) : (
           <>
             {winner ? "WINNER" : "TURN"}:{" "}
             {winner ? (
               <span
-                className={`${
-                  winner === "x" ? "text-green-500" : "text-red-500"
-                }`}
+                style={{
+                  color: winner === user_1.sign ? user_1.color : user_2.color,
+                }}
               >
                 {winner.toUpperCase()}
               </span>
             ) : (
               <span
-                className={`${
-                  turn === "1" ? "text-green-500" : "text-red-500"
-                }`}
+                style={{
+                  color: turn === "1" ? user_1.color : user_2.color,
+                }}
               >
-                {turn === "1" ? "X" : "O"}
+                {turn === "1" ? user_1.sign?.toUpperCase() : user_2.sign?.toUpperCase()}
               </span>
             )}
           </>
@@ -49,9 +47,9 @@ interface CellProps {
   sign: string | null;
 }
 const Cell = ({ i, sign }: CellProps) => {
-  const { board, winner } = useGame();
+  const { board, winner, user_1, user_2 } = useGame();
   const dispatch = useDispatch();
-  const disabled = board[i] === "x" || board[i] === "o" || winner;
+  const disabled = board[i] === user_1.sign || board[i] === user_2.sign || winner;
 
   if (disabled) {
     return (
@@ -59,7 +57,7 @@ const Cell = ({ i, sign }: CellProps) => {
         <p
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl font-semibold"
           style={{
-            color: sign === "x" ? "green" : "red",
+            color: sign === user_1.sign ? user_1.color : user_2.color,
           }}
         >
           {sign}

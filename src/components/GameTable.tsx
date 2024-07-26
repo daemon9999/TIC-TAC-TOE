@@ -1,36 +1,26 @@
-import UserCard from "./UserCard"
+import { useGame } from "src/utils/game";
+import UserCard from "./UserCard";
 
 const GameTable = () => {
-
-
-    const users = [
-        {
-            id: 1,
-            nickname: 'User 1',
-            sign: 'X',
-            color: 'green',
-        
-        },
-        {
-            id: 2,
-            nickname: 'User 2',
-            sign: 'O',
-            color: 'red',
-        
-        }
-    ]
-
-
+  const { user_1, user_2 } = useGame();
+  const users = [user_1, user_2];
   return (
-    <div className="p-10 space-y-10 w-full">
-        <h2 className="text-5xl font-bold text-slate-800 ">TIC TAC TOE</h2>
-       <div className="grid grid-cols-2 gap-7 w-full">
-            {users.map(({color, nickname, id, sign} : Record<string, any>) =>  (
-                <UserCard color={color} nickname={nickname} key={id} sign={sign}/>
-            ))}
-       </div>
-    </div>
-  )
-}
+    <div className="p-10 space-y-10 w-full h-full flex flex-col ">
+      <h2 className="text-5xl font-bold text-slate-800 ">TIC TAC TOE</h2>
+      <div className="grid grid-cols-2 gap-7 w-full ">
+        {users.map(({ color, name, id, sign }: User) => (
+          <UserCard color={color} name={name} key={id} id={id} sign={sign} />
+        ))}
+      </div>
 
-export default GameTable
+      <button
+        type="button"
+        className="bg-slate-800 text-white rounded-md px-5 py-4 text-2xl mt-auto "
+      >
+        Clear Board
+      </button>
+    </div>
+  );
+};
+
+export default GameTable;

@@ -46,10 +46,17 @@ const gameSlice = createSlice({
     clickBoard: (state, action) => {
       const newBoard = [...state.board];
 
-      newBoard[action.payload] = state.turn === "1" ? "x" : "o";
+      newBoard[action.payload] = state.turn === "1" ? state.user_1.sign : state.user_2.sign;
       state.board = newBoard;
       checkWinner(state);
     },
+
+
+    setUsers: (state, action) => {
+      const {user_1, user_2} : {user_1: User, user_2: User} = action.payload
+      state.user_1 = user_1
+      state.user_2 = user_2
+    }
   },
 });
 
@@ -70,4 +77,4 @@ const checkWinner = (state: InitialStateProps) => {
 };
 
 export default gameSlice.reducer;
-export const { startGame, changeTurn, clickBoard } = gameSlice.actions;
+export const { startGame, changeTurn, clickBoard, setUsers } = gameSlice.actions;

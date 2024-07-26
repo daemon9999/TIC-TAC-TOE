@@ -12,7 +12,7 @@ type StaticModalType = {
 
 type User = {
   id: number,
-  name: string,
-  sign: '',
-  color: ''
+  name: string | undefined,
+  sign: string | null ,
+  color: string | undefined
 }

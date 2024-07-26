@@ -1,14 +1,8 @@
-interface UserCardProps {
-  nickname: string;
-  sign: string;
 
-  color: string;
-}
-
-const UserCard = ({ color, nickname, sign }: UserCardProps) => {
+const UserCard = ({ color, name, sign }: User) => {
   return (
     <div className="text-white p-6 bg-slate-800 rounded-md flex flex-col gap-y-6">
-      <h4 className="text-3xl font-medium ">{nickname}</h4>
+      <h4 className="text-3xl font-medium ">{name}</h4>
 
       <div className="flex flex-col gap-y-4">
         <div className="flex items-center gap-x-2">
@@ -22,7 +16,7 @@ const UserCard = ({ color, nickname, sign }: UserCardProps) => {
           <p className="text-xl">Sign: </p>{" "}
           <span className="text-xl font-medium" style={{
             color: color
-          }}>{sign.toUpperCase()}</span>
+          }}>{sign?.toUpperCase()}</span>
         </div>
       </div>
     </div>
