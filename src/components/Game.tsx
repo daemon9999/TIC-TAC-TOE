@@ -1,5 +1,4 @@
 
-import { useGame } from "src/utils/game"
 import GameTable from "./GameTable"
 import TicTacToe from "./TicTacToe"
 

@@ -1,6 +1,5 @@
 import classNames from 'classnames'
-import React from 'react'
-import { FieldInputProps, FormikContextType, useFormikContext } from 'formik'
+import { FieldInputProps, useFormikContext } from 'formik'
 import { UsersData } from './Entry'
 
 
@@ -52,7 +51,7 @@ const ColorSelector = ({field, changeColor}: ColorSelectorProps) => {
 
 
     const handleColor = (color: string) => {
-        field.name === 'color_1' ? (color !== values.color_2 ? changeColor(color) : null) : (color !== values.color_1 ? changeColor(color) : nullf)
+        field.name === 'color_1' ? (color !== values.color_2 ? changeColor(color) : null) : (color !== values.color_1 ? changeColor(color) : null)
     }
   return (
     <div className='grid grid-cols-4 gap-1  '>

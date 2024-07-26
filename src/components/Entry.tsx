@@ -1,4 +1,4 @@
-import { Formik, Form, FormikProps, Field, FieldInputProps } from "formik";
+import { Formik, Form,  Field } from "formik";
 import { useCallback } from "react";
 import { AiOutlineInfo } from "react-icons/ai";
 
